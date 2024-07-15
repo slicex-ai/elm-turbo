@@ -68,7 +68,7 @@ output = pipe(messages, **generation_args)
 print(output[0]['generated_text']) 
 ```
 
-## Setup ELM
+## Setup ELM-v0.2
 ```bash
 git clone https://github.com/slicex-ai/elm2
 cd elm2
@@ -77,7 +77,7 @@ git lfs install
 sh install_trtllm_with_docker.sh
 ```
 
-## Run ELMv2-trtllm engines
+## Run ELM-v0.2-trtllm engines
 
 Example - To run trt-engine for `slicexai/elm-v0.2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
