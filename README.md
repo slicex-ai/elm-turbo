@@ -69,14 +69,19 @@ print(output[0]['generated_text'])
 ```
 
 ## Setup ELM-v0.2
+### Setup Huggingface Transformers
 ```bash
 git clone https://github.com/slicex-ai/elm2
 cd elm2
 pip install -r requirements
 sudo apt-get install git-lfs 
 git lfs install
+```
+### Setup Nvidia's Trtllm
+```
 sh install_trtllm_with_docker.sh
 ```
+
 
 ## Run ELM-v0.2-trtllm engines
 
