@@ -30,3 +30,34 @@ sudo apt-get install git-lfs
 git lfs install
 sh download_models.sh
 ```
+
+## Run ELMv2-trtllm engines
+```
+bash install_trtllm_with_docker.sh
+sh run_engine.sh <your_user_query>
+```
+
+## (Optional) Create your ELMv2-trtllm engines from ELMv2 Huggingface(HF) checkpoints.
+This step invovles first converting ELMv2 HF slices 
+
+```bash
+cd examples/phi3
+pip install -r requirements.txt
+python3 convert_checkpoint.py --model_dir <hf_slice_checkpoint> --output_dir <trtllm_slice_checkpoint>
+trtllm-build --checkpoint_dir <trtllm_slice_checkpoint> \
+    --gemm_plugin bfloat16 \
+    --output_dir <trtllm_slice_engine>
+```
+
+
+
+```bash
+python3 ../run.py \
+  --engine_dir <trtllm_slice_engine> \
+  --max_output_len 100 \
+  --tokenizer_dir meta-llama/Llama-2-7b-chat-hf \
+  --input_text """<s><|user|>
+How to setup a human base on Mars? Give short answer<|end|>
+<|assistant|>
+"""
+```
