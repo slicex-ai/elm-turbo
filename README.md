@@ -25,8 +25,16 @@ In our second version, we applied our decompossible ELM techniques on a popular 
 ## RUN ELMv2 models with Huggingface Transformers library.
 There are four slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-v0.2-0.125-instruct` (1.33B params), 2. `slicexai/elm-v0.2-0.25-instruct`(1.56B params), 3. `slicexai/elm-v0.2-0.50-instruct` (2.01B params), 4. `slicexai/elm-v0.2-0.75-instruct` (2.01B params). 
 
-Example - To run the `slicexai/elm-v0.2-0.50-instruct`
+Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct).
 ```bash
+flash_attn==2.5.8
+torch==2.3.1
+accelerate==0.31.0
+transformers==4.41.2
+```
+
+Example - To run the `slicexai/elm-v0.2-0.50-instruct`
+```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 
