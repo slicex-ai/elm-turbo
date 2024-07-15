@@ -40,7 +40,7 @@ import torch
 
 elmv2_model = "slicexai/elm-v0.2-0.50-instruct"
 model = AutoModelForCausalLM.from_pretrained( 
-    slice_model,  
+    elmv2_model,  
     device_map="cuda",  
     torch_dtype=torch.bfloat16,  
     trust_remote_code=True,
