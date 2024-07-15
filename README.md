@@ -20,10 +20,10 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 - **HuggingFace** (access ELM Model cards, code & app from HF): https://huggingface.co/slicexai
 
 ## ELM-v0.2 Model Release
-In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct`. We release four slices of the `Phi-3-mini-128k-instruct` model. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
+In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct`. Post training, we generate four slices of varying sizes ranging from 1.33B - 2.91B params. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
 
 ## RUN ELM-v0.2 models with Huggingface Transformers library.
-There are four slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-v0.2-0.125-instruct` (1.33B params), 2. `slicexai/elm-v0.2-0.25-instruct`(1.56B params), 3. `slicexai/elm-v0.2-0.50-instruct` (2.01B params), 4. `slicexai/elm-v0.2-0.75-instruct` (2.01B params). 
+There are four slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-v0.2-0.125-instruct` (1.33B params), 2. `slicexai/elm-v0.2-0.25-instruct`(1.56B params), 3. `slicexai/elm-v0.2-0.50-instruct` (2.01B params), 4. `slicexai/elm-v0.2-0.75-instruct` (2.91B params). 
 
 Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct).
 ```bash
@@ -74,13 +74,15 @@ git clone https://github.com/slicex-ai/elm2
 cd elm2
 sudo apt-get install git-lfs 
 git lfs install
-sh download_models.sh
+sh install_trtllm_with_docker.sh
 ```
 
 ## Run ELMv2-trtllm engines
+
+Example - To run trt-engine for `slicexai/elm-v0.2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
-bash install_trtllm_with_docker.sh
-sh run_engine.sh <your_user_query>
+sh run_engine.sh "slicexai/elm-v0.2-0.50-instruct-trtllm-A100" Can you provide ways to eat combinations of bananas and dragonfruits?
+sh run_engine.sh "slicexai/elm-v0.2-0.50-instruct-trtllm-H100" Can you provide ways to eat combinations of bananas and dragonfruits?
 ```
 
 ## (Optional) Create your ELMv2-trtllm engines from ELMv2 Huggingface(HF) checkpoints.
