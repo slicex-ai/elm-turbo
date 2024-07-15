@@ -20,7 +20,7 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 - **HuggingFace** (access ELM Model cards, code & app from HF): https://huggingface.co/slicexai
 
 ## ELM-v0.2 Model Release
-In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct`. Post training, we generate four slices of varying sizes ranging from 1.33B - 2.91B params. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
+In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct` (TODO - Refer to phi3-licence). Post training, we generate four slices of varying sizes ranging from 1.33B - 2.91B params. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
 
 ## 1. Run ELM-v0.2 models with Huggingface Transformers library.
 There are four slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-v0.2-0.125-instruct` (1.33B params), 2. `slicexai/elm-v0.2-0.25-instruct`(1.56B params), 3. `slicexai/elm-v0.2-0.50-instruct` (2.01B params), 4. `slicexai/elm-v0.2-0.75-instruct` (2.91B params). 
