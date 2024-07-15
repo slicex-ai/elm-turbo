@@ -41,6 +41,8 @@ model = AutoModelForCausalLM.from_pretrained(
 messages = [ 
     {"role": "user", "content": "Can you provide ways to eat combinations of bananas and dragonfruits?"}, 
 ]
+
+tokenizer = AutoTokenizer.from_pretrained(elmv2_model, legacy=False) 
 pipe = pipeline( 
     "text-generation", 
     model=model, 
