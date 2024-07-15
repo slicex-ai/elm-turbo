@@ -22,7 +22,7 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 ## ELM-v0.2 Model Release
 In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct`. Post training, we generate four slices of varying sizes ranging from 1.33B - 2.91B params. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
 
-## RUN ELM-v0.2 models with Huggingface Transformers library.
+## 1. Run ELM-v0.2 models with Huggingface Transformers library.
 There are four slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-v0.2-0.125-instruct` (1.33B params), 2. `slicexai/elm-v0.2-0.25-instruct`(1.56B params), 3. `slicexai/elm-v0.2-0.50-instruct` (2.01B params), 4. `slicexai/elm-v0.2-0.75-instruct` (2.91B params). 
 
 Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct).
@@ -68,7 +68,28 @@ output = pipe(messages, **generation_args)
 print(output[0]['generated_text']) 
 ```
 
-## Setup ELM-v0.2
+## 2. Running ELM-v0.2 via Nvidia's TensorRT-LLM
+You can either use the instructions provided by Nvidia in [trtllm](<link>). To run on edge, (windows RTX), please refer to the instructions at https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md.
+
+or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
+
+### Setup Nvidia's Trtllm
+```
+sh install_trtllm_with_docker.sh
+```
+
+## Run ELM-v0.2-trtllm engines
+
+Example - To run trt-engine for `slicexai/elm-v0.2-0.50-instruct` on a A100 & H100 gpus respectively,
+```
+python run_engine.py A100 "slicexai/elm-v0.2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
+python run_engine.py H100 "slicexai/elm-v0.2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
+```
+------------------
+------------------
+------------------
+
+
 ### Setup Huggingface Transformers
 ```bash
 git clone https://github.com/slicex-ai/elm2
