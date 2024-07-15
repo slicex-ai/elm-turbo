@@ -5,7 +5,7 @@
   <img src="elm-rambutan.png" width="256"/>
 </div>
 
-ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM-v0.2** models (named _Rambutan_). 
+ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM2** models (named _Rambutan_). 
 
 _Model:_ ELM introduces a new type of _(de)-composable LLM model architecture_ along with the algorithmic optimizations required to learn (training) and run (inference) these models. At a high level, we train a single ELM model in a self-supervised manner (during pre-training phase) but once trained the ELM model can be sliced in many ways to fit different user/task needs. The optimizations can be applied to the model either during the pre-training and/or fine-tuning stage. 
 
@@ -19,11 +19,11 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 
 - **HuggingFace** (access ELM Model cards, code & app from HF): https://huggingface.co/slicexai
 
-## ELM-v0.2 Model Release
+## ELM2 Model Release
 In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct` (TODO - Refer to phi3-licence). Post training, we generate four slices of varying sizes ranging from 1.33B - 2.91B params. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
 
-## 1. Run ELM-v0.2 models with Huggingface Transformers library.
-There are four slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-v0.2-0.125-instruct` (1.33B params), 2. `slicexai/elm-v0.2-0.25-instruct`(1.56B params), 3. `slicexai/elm-v0.2-0.50-instruct` (2.01B params), 4. `slicexai/elm-v0.2-0.75-instruct` (2.91B params). 
+## 1. Run ELM2 models with Huggingface Transformers library.
+There are three slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm2-0.125-instruct` (1.33B params), 2. `slicexai/elm2-0.25-instruct`(1.56B params), 3. `slicexai/elm2-0.50-instruct` (2.01B params). 
 
 Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct).
 ```bash
@@ -33,12 +33,12 @@ accelerate==0.31.0
 transformers==4.41.2
 ```
 
-Example - To run the `slicexai/elm-v0.2-0.50-instruct`
+Example - To run the `slicexai/elm2-0.50-instruct`
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 
-elmv2_model = "slicexai/elm-v0.2-0.50-instruct"
+elmv2_model = "slicexai/elm2-0.50-instruct"
 model = AutoModelForCausalLM.from_pretrained( 
     elmv2_model,  
     device_map="cuda",  
@@ -68,7 +68,7 @@ output = pipe(messages, **generation_args)
 print(output[0]['generated_text']) 
 ```
 
-## 2. Running ELM-v0.2 via Nvidia's TensorRT-LLM
+## 2. Running ELM2 via Nvidia's TensorRT-LLM
 You can either use the instructions provided by Nvidia in [trtllm](<link>). To run on edge, (windows RTX), please refer to the instructions at https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md.
 
 or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
@@ -78,12 +78,12 @@ or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the i
 sh install_trtllm_with_docker.sh
 ```
 
-## Run ELM-v0.2-trtllm engines
+## Run ELM2-trtllm engines
 
-Example - To run trt-engine for `slicexai/elm-v0.2-0.50-instruct` on a A100 & H100 gpus respectively,
+Example - To run trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
-python run_engine.py A100 "slicexai/elm-v0.2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
-python run_engine.py H100 "slicexai/elm-v0.2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
+python run_engine.py A100 "slicexai/elm2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
+python run_engine.py H100 "slicexai/elm2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
 ```
 ------------------
 ------------------
@@ -104,12 +104,12 @@ sh install_trtllm_with_docker.sh
 ```
 
 
-## Run ELM-v0.2-trtllm engines
+## Run ELM2-trtllm engines
 
-Example - To run trt-engine for `slicexai/elm-v0.2-0.50-instruct` on a A100 & H100 gpus respectively,
+Example - To run trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
-sh run_engine.sh "slicexai/elm-v0.2-0.50-instruct-trtllm-A100" Can you provide ways to eat combinations of bananas and dragonfruits?
-sh run_engine.sh "slicexai/elm-v0.2-0.50-instruct-trtllm-H100" Can you provide ways to eat combinations of bananas and dragonfruits?
+sh run_engine.sh "slicexai/elm2-0.50-instruct-trtllm-A100" Can you provide ways to eat combinations of bananas and dragonfruits?
+sh run_engine.sh "slicexai/elm2-0.50-instruct-trtllm-H100" Can you provide ways to eat combinations of bananas and dragonfruits?
 ```
 
 ## (Optional) Create your ELMv2-trtllm engines from ELMv2 Huggingface(HF) checkpoints.
