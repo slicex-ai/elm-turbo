@@ -72,6 +72,7 @@ print(output[0]['generated_text'])
 ```bash
 git clone https://github.com/slicex-ai/elm2
 cd elm2
+pip install -r requirements
 sudo apt-get install git-lfs 
 git lfs install
 sh install_trtllm_with_docker.sh
