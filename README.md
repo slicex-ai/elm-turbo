@@ -22,6 +22,42 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 ## ELM-v0.2 Model Release
 In our second version, we applied our decompossible ELM techniques on a popular open-source LLM - `microsoft/Phi-3-mini-128k-instruct`. We release four slices of the `Phi-3-mini-128k-instruct` model. Additionally, we integrated these slices into NVIDIA's [trtllm](https://github.com/NVIDIA/TensorRT-LLM) and present you the trtllm engines compatible for A100 and H100 GPUs resepctively.
 
+## RUN ELMv2 models with Huggingface Transformers library.
+There are four instruct slices derived from the `phi3-mini` model - 1. `slicexai/elm-v0.2-0.125-instruct`, 2. `slicexai/elm-v0.2-0.25-instruct`, 3. `slicexai/elm-v0.2-0.50-instruct`, 4. `slicexai/elm-v0.2-0.75-instruct`. 
+
+Example - To run the `slicexai/elm-v0.2-0.50-instruct`
+```bash
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+import torch
+
+elmv2_model = "slicexai/elm-v0.2-0.50-instruct"
+model = AutoModelForCausalLM.from_pretrained( 
+    slice_model,  
+    device_map="cuda",  
+    torch_dtype=torch.bfloat16,  
+    trust_remote_code=True,
+    attn_implementation="flash_attention_2"
+)
+messages = [ 
+    {"role": "user", "content": "Can you provide ways to eat combinations of bananas and dragonfruits?"}, 
+]
+pipe = pipeline( 
+    "text-generation", 
+    model=model, 
+    tokenizer=tokenizer, 
+) 
+
+generation_args = { 
+    "max_new_tokens": 500, 
+    "return_full_text": False, 
+    "temperature": 0.0, 
+    "do_sample": False, 
+} 
+
+output = pipe(messages, **generation_args) 
+print(output[0]['generated_text']) 
+```
+
 ## Setup ELM
 ```bash
 git clone https://github.com/slicex-ai/elm2
