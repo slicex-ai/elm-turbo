@@ -2,7 +2,7 @@
 
 rm -rf TensorRT-LLM
 git clone https://github.com/NVIDIA/TensorRT-LLM.git
-cd TensorRT-LLM
+#cd TensorRT-LLM
 
 CURR_FOLDER=$(pwd)
 DOCKER_NAME=elm_trtllm
