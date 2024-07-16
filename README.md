@@ -73,13 +73,13 @@ You can either use the instructions provided by Nvidia in [trtllm](<link>). To r
 
 or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
 
-### Setup Nvidia's Trtllm with docker.
+### a. Setup Nvidia's Trtllm with docker.
 ```
 sh setup_trtllm.sh
 ```
 This creates a docker named `elm_trtllm` and installs tensorrt_llm.
 
-### Run pre-built ELM2-trtllm engines with your input prompts.
+### b. Run pre-built ELM2-trtllm engines with your input prompts.
 
 Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
@@ -99,7 +99,7 @@ Supported gpu_types : [A100, H100]
 ```
 
 
-### (Optional) Create & run your own ELM2-trtllm engines from ELM2 Huggingface(HF) checkpoints.
+### c. (Optional) Create & run your own ELM2-trtllm engines from ELM2 Huggingface(HF) checkpoints.
 
 #### Compile the Model into a TensorRT Engine
 
