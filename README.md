@@ -69,9 +69,13 @@ print(output[0]['generated_text'])
 ```
 
 ## 2. Running ELM2 via Nvidia's TensorRT-LLM
-You can either use the instructions provided by Nvidia in [trtllm](<link>). To run on edge, (windows RTX), please refer to the instructions at https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md.
 
-or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
+- If you are using A100 or H100 GPUs, you can utilize our pre-built ELM2-TRTLLM engines. Below are the instructions to install and run them.
+
+- Additionally, you can build your own TRTLLM engines by following the instructions provided in Section c.
+
+- To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
+
 
 ### a. Download & install Nvidia's TensorRT-LLM with docker.
 The following commands create a Docker container named `elm_trtllm` and install TensorRT-LLM. If you encounter any installation errors related to TensorRT-LLM, please refer to the troubleshooting section [here](https://nvidia.github.io/TensorRT-LLM/reference/troubleshooting.html).
