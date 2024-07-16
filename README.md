@@ -93,8 +93,6 @@ sh run_elm2_trtllm_engine.sh slicexai/elm2-0.50-instruct H100 "plan a fun day wi
 
 Detailed instructions to run the engine:
 ```
-docker attach elm_trtllm
-cd /lm
 Usage: sh run_elm2_trtllm_engine.sh <elm2_model_id> <gpu_type> "<input_prompt>"
 Supported elm2_model_id choices : [slicexai/elm2-0.50-instruct, slicexai/elm2-0.25-instruct, slicexai/elm2-0.125-instruct]
 Supported gpu_types : [A100, H100]
