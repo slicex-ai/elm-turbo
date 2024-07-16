@@ -87,8 +87,8 @@ Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on a 
 ```
 docker attach elm_trtllm
 cd /lm
-sh run_elm2_trtllm_engine.sh elm2-0.50-instruct A100 "plan a fun day with my grandparents."
-sh run_elm2_trtllm_engine.sh elm2-0.50-instruct H100 "plan a fun day with my grandparents."
+sh run_elm2_trtllm_engine.sh slicexai/elm2-0.50-instruct A100 "plan a fun day with my grandparents."
+sh run_elm2_trtllm_engine.sh slicexai/elm2-0.50-instruct H100 "plan a fun day with my grandparents."
 ```
 
 Detailed instructions to run the engine:
