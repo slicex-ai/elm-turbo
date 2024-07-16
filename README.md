@@ -75,6 +75,8 @@ or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the i
 
 ### a. Download & install Nvidia's TensorRT-LLM with docker.
 ```
+git clone https://github.com/slicex-ai/elm2.git
+cd elm2
 sh setup_trtllm.sh
 ```
 This creates a docker named `elm_trtllm` and installs tensorrt_llm.
