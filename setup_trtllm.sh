@@ -12,7 +12,7 @@ DOCKER_IMAGE=nvidia/cuda:12.4.0-devel-ubuntu22.04
 
 docker run -d --gpus all -it --shm-size=8g --name ${DOCKER_NAME} --ulimit memlock=-1 --rm -v ${CURR_FOLDER}:/lm $DOCKER_IMAGE
 
-command="cd /lm && apt-get update && apt-get -y install python3.10 python3-pip openmpi-bin libopenmpi-dev"
+command="cd /lm && apt-get update && apt-get -y install python3.10 python3-pip openmpi-bin libopenmpi-dev git"
 docker exec ${DOCKER_NAME} sh -c "${command}"
 
 command="pip3 install tensorrt_llm -U --pre --extra-index-url https://pypi.nvidia.com"
