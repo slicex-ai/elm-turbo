@@ -4,7 +4,7 @@ CURR_FOLDER=$(pwd)
 DOCKER_NAME=elm_trtllm
 
 if [ $# -ne 3 ]; then
-    echo "Usage: $0 <hf_elm2_model_id> <gpu_type> <input_prompt>"
+    echo "Usage: $0 <elm2_model_id> <gpu_type> <input_prompt>"
     echo "Example command to run A100 engine: $0 slicexai/elm2-0.50-instruct A100 'Can you provide ways to eat combinations of bananas and dragonfruits?'"
     echo "Example command to run H100 engine: $0 slicexai/elm2-0.50-instruct H100"
     echo "Supported 'elm2_model_id' choices : [elm2-0.50-instruct, elm2-0.25-instruct, elm2-0.125-instruct]"
