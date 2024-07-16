@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#Based on installation instructions provided at --> https://nvidia.github.io/TensorRT-LLM/installation/linux.html#installing-on-linux
+# This script is based on the installation instructions from:
+# https://nvidia.github.io/TensorRT-LLM/installation/linux.html#installing-on-linux
 
 rm -rf TensorRT-LLM
 git clone https://github.com/NVIDIA/TensorRT-LLM.git
