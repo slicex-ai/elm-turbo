@@ -109,6 +109,7 @@ To build an elm2 `slicexai/elm2-0.50-instruct` tensortrt_llm engine with INT-8 q
 docker attach elm_trtllm
 cd /lm/TensorRT-LLM/examples/phi
 pip install flash_attn
+huggingface-cli download slicexai/elm2-0.50-instruct --local-dir ../slicexai/elm2-0.50-instruct
 python3 convert_checkpoint.py --dtype bfloat16 --use_weight_only --weight_only_precision int8  --model_dir ../slicexai/elm2-0.50-instruct --output_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt
 trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_len 4096 --max_batch_size 256 --checkpoint_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm2-0.50-instruct-trtllm-engine
 ```
@@ -119,7 +120,9 @@ Now that you’ve got your model engine, its time to run it.
 ```bash
 python3 ../run.py \
   --engine_dir ../slicexai/elm2-0.50-instruct-trtllm-engine \
-  --max_output_len 256 \
+  --max_output_len 512 \
+  --presence_penalty 0.7 \
+  --frequency_penalty 0.7 \
   --tokenizer_dir ../slicexai/elm2-0.50-instruct \
   --input_text """<s><|user|>
 plan a fun day with my grandparents.<|end|>
