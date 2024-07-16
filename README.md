@@ -107,10 +107,8 @@ Supported gpu_types : [A100, H100]
 docker attach elm_trtllm
 cd /lm/TensorRT-LLM/examples/phi
 pip install -r requirements.txt
-python3 convert_checkpoint.py --model_dir <hf_elm2_checkpoint> --output_dir <trtllm_elm2_checkpoint>
-trtllm-build --checkpoint_dir <trtllm_elm2_checkpoint> \
-    --gemm_plugin bfloat16 \
-    --output_dir <trtllm_elm2_engine>
+python3 convert_checkpoint.py --model_dir <hf_elm2_checkpoint> --output_dir <trtllm_elm2_checkpoint> 
+trtllm-build --checkpoint_dir <trtllm_elm2_checkpoint> --gemm_plugin bfloat16 --output_dir <trtllm_elm2_engine>
 ```
 
 #### Run the Model
