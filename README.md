@@ -83,7 +83,7 @@ This creates a docker named `elm_trtllm` and installs tensorrt_llm.
 
 ### b. Run pre-built ELM2-trtllm engines with your input prompts.
 
-Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
+Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on A100 & H100 gpus respectively,
 ```
 docker attach elm_trtllm
 cd /lm
