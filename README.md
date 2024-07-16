@@ -73,64 +73,50 @@ You can either use the instructions provided by Nvidia in [trtllm](<link>). To r
 
 or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
 
-### Setup Nvidia's Trtllm
+### Setup Nvidia's Trtllm with docker.
 ```
-sh install_trtllm_with_docker.sh
+sh setup_trtllm.sh
 ```
+This creates a docker named `elm_trtllm` and installs tensorrt_llm.
 
-## Run ELM2-trtllm engines
-
-Example - To run trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
-```
-python run_engine.py A100 "slicexai/elm2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
-python run_engine.py H100 "slicexai/elm2-0.50-instruct" Can you provide ways to eat combinations of bananas and dragonfruits?
-```
-------------------
-------------------
-------------------
-
-
-### Setup Huggingface Transformers
-```bash
-git clone https://github.com/slicex-ai/elm2
-cd elm2
-pip install -r requirements
-sudo apt-get install git-lfs 
-git lfs install
-```
-### Setup Nvidia's Trtllm
-```
-sh install_trtllm_with_docker.sh
-```
-
-
-## Run ELM2-trtllm engines
+### Run ELM2-trtllm engines with your input prompts.
 
 Example - To run trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
-sh run_engine.sh "slicexai/elm2-0.50-instruct-trtllm-A100" Can you provide ways to eat combinations of bananas and dragonfruits?
-sh run_engine.sh "slicexai/elm2-0.50-instruct-trtllm-H100" Can you provide ways to eat combinations of bananas and dragonfruits?
+docker attach elm_trtllm
+cd /lm
+sh run_elm2_trtllm_engine.sh elm2-0.50-instruct A100 "Can you provide ways to eat combinations of bananas and dragonfruits?"
+sh run_elm2_trtllm_engine.sh elm2-0.50-instruct H100 "Can you provide ways to eat combinations of bananas and dragonfruits?"
+```
+Usage info `run_elm2_trtllm_engine.sh`
+```
+Usage: sh run_elm2_trtllm_engine.sh <elm2_model_id> <gpu_type> "<input_prompt>"
+Supported elm2_model_id choices : [elm2-0.50-instruct, elm2-0.25-instruct, elm2-0.125-instruct]
+Supported gpu_types : [A100, H100]
 ```
 
-## (Optional) Create your ELMv2-trtllm engines from ELMv2 Huggingface(HF) checkpoints.
-This step invovles first converting ELMv2 HF slices 
+### (Optional) Create & run your own ELMv2-trtllm engines from ELMv2 Huggingface(HF) checkpoints.
+
+#### Compile the Model into a TensorRT Engine
 
 ```bash
-cd examples/phi3
+docker attach elm_trtllm
+cd /lm/TensorRT-LLM/examples/phi
 pip install -r requirements.txt
-python3 convert_checkpoint.py --model_dir <hf_slice_checkpoint> --output_dir <trtllm_slice_checkpoint>
+python3 convert_checkpoint.py --model_dir <hf_elm2_checkpoint> --output_dir <trtllm_slice_checkpoint>
 trtllm-build --checkpoint_dir <trtllm_slice_checkpoint> \
     --gemm_plugin bfloat16 \
     --output_dir <trtllm_slice_engine>
 ```
 
-
+#### Run the Model
+Now that you’ve got your model engine, its time to run it.
 
 ```bash
 python3 ../run.py \
   --engine_dir <trtllm_slice_engine> \
   --max_output_len 100 \
-  --tokenizer_dir meta-llama/Llama-2-7b-chat-hf \
+  --tokenizer_dir <hf_elm2_checkpoint> \
   --input_text """<s><|user|>
 How to setup a human base on Mars? Give short answer<|end|>
 <|assistant|>
