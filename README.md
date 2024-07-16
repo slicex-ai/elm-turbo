@@ -72,7 +72,7 @@ print(output[0]['generated_text'])
 
 - If you are using A100 or H100 GPUs, you can utilize our pre-built ELM2-TRTLLM engines. Below are the instructions to install and run them.
 
-- Additionally, you can build your own TRTLLM engines by following the instructions provided in Section c.
+- Additionally, you can build your own TRTLLM engines by following the instructions provided in [Section .C](https://github.com/slicex-ai/elm2/blob/main/README.md#c-optional-create--run-your-own-elm2-trtllm-engines-from-elm2-huggingfacehf-checkpoints).
 
 - To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
 
