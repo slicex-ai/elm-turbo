@@ -74,12 +74,13 @@ You can either use the instructions provided by Nvidia in [trtllm](<link>). To r
 or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
 
 ### a. Download & install Nvidia's TensorRT-LLM with docker.
+The following commands create a Docker container named `elm_trtllm` and install TensorRT-LLM. If you encounter any installation errors related to TensorRT-LLM, please refer to the troubleshooting section [here](https://nvidia.github.io/TensorRT-LLM/reference/troubleshooting.html).
 ```
 git clone https://github.com/slicex-ai/elm2.git
 cd elm2
 sh setup_trtllm.sh
 ```
-This creates a docker named `elm_trtllm` and installs tensorrt_llm.
+This creates a docker named `elm_trtllm` and installs tensorrt_llm. 
 
 ### b. Run pre-built ELM2-trtllm engines with your input prompts.
 
@@ -102,14 +103,14 @@ Supported gpu_types : [A100, H100]
 ### c. (Optional) Create & run your own ELM2-trtllm engines from ELM2 Huggingface(HF) checkpoints.
 
 #### Compile the Model into a TensorRT-LLM Engine
-Following instructions are to build a tensortrt_llm engine with int-8 quantization. For more detailed configurations, please refer to the phi3 conversion instructions provided by Nvidia [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/phi).
+To build an elm2 `slicexai/elm2-0.50-instruct` tensortrt_llm engine with INT-8 quantization, follow the instructions below. For more detailed configurations, refer to the Phi3 conversion instructions provided by NVIDIA [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/phi).
 
 ```bash
 docker attach elm_trtllm
 cd /lm/TensorRT-LLM/examples/phi
-#pip install -r requirements.txt
-python3 convert_checkpoint.py --use_weight_only --weight_only_precision int8 --max_seq_len 4096 --max_batch_size 256 --model_dir ../slicexai/elm2-0.50-instruct --output_dir ../slicexai/elm2-0.50-instruct_trtllm_ckpt
-trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --checkpoint_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm2-0.50-instruct-trtllm-engine
+pip install flash_attn
+python3 convert_checkpoint.py --dtype bfloat16 --use_weight_only --weight_only_precision int8  --model_dir ../slicexai/elm2-0.50-instruct --output_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt
+trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_len 4096 --max_batch_size 256 --checkpoint_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm2-0.50-instruct-trtllm-engine
 ```
 
 #### Run the Model
@@ -117,9 +118,9 @@ Now that you’ve got your model engine, its time to run it.
 
 ```bash
 python3 ../run.py \
-  --engine_dir <trtllm_elm2_engine> \
-  --max_output_len 100 \
-  --tokenizer_dir <hf_elm2_checkpoint> \
+  --engine_dir ../slicexai/elm2-0.50-instruct-trtllm-engine \
+  --max_output_len 256 \
+  --tokenizer_dir ../slicexai/elm2-0.50-instruct \
   --input_text """<s><|user|>
 plan a fun day with my grandparents.<|end|>
 <|assistant|>
