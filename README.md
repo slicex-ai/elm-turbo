@@ -85,8 +85,8 @@ Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on a 
 ```
 docker attach elm_trtllm
 cd /lm
-sh run_elm2_trtllm_engine.sh elm2-0.50-instruct A100 "Can you provide ways to eat combinations of bananas and dragonfruits?"
-sh run_elm2_trtllm_engine.sh elm2-0.50-instruct H100 "Can you provide ways to eat combinations of bananas and dragonfruits?"
+sh run_elm2_trtllm_engine.sh elm2-0.50-instruct A100 "plan a fun day with my grandparents."
+sh run_elm2_trtllm_engine.sh elm2-0.50-instruct H100 "plan a fun day with my grandparents."
 ```
 
 Detailed instructions to run the engine:
@@ -122,7 +122,7 @@ python3 ../run.py \
   --max_output_len 100 \
   --tokenizer_dir <hf_elm2_checkpoint> \
   --input_text """<s><|user|>
-How to setup a human base on Mars? Give short answer<|end|>
+plan a fun day with my grandparents.<|end|>
 <|assistant|>
 """
 ```
