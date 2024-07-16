@@ -38,9 +38,9 @@ Example - To run the `slicexai/elm2-0.50-instruct`
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 
-elmv2_model = "slicexai/elm2-0.50-instruct"
+elm2_model = "slicexai/elm2-0.50-instruct"
 model = AutoModelForCausalLM.from_pretrained( 
-    elmv2_model,  
+    elm2_model,  
     device_map="cuda",  
     torch_dtype=torch.bfloat16,  
     trust_remote_code=True,
@@ -50,7 +50,7 @@ messages = [
     {"role": "user", "content": "Can you provide ways to eat combinations of bananas and dragonfruits?"}, 
 ]
 
-tokenizer = AutoTokenizer.from_pretrained(elmv2_model, legacy=False) 
+tokenizer = AutoTokenizer.from_pretrained(elm2_model, legacy=False) 
 pipe = pipeline( 
     "text-generation", 
     model=model, 
@@ -79,23 +79,27 @@ sh setup_trtllm.sh
 ```
 This creates a docker named `elm_trtllm` and installs tensorrt_llm.
 
-### Run ELM2-trtllm engines with your input prompts.
+### Run pre-built ELM2-trtllm engines with your input prompts.
 
-Example - To run trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
+Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on a A100 & H100 gpus respectively,
 ```
 docker attach elm_trtllm
 cd /lm
 sh run_elm2_trtllm_engine.sh elm2-0.50-instruct A100 "Can you provide ways to eat combinations of bananas and dragonfruits?"
 sh run_elm2_trtllm_engine.sh elm2-0.50-instruct H100 "Can you provide ways to eat combinations of bananas and dragonfruits?"
 ```
-Usage info `run_elm2_trtllm_engine.sh`
+
+Detailed instructions to run the engine:
 ```
+docker attach elm_trtllm
+cd /lm
 Usage: sh run_elm2_trtllm_engine.sh <elm2_model_id> <gpu_type> "<input_prompt>"
 Supported elm2_model_id choices : [elm2-0.50-instruct, elm2-0.25-instruct, elm2-0.125-instruct]
 Supported gpu_types : [A100, H100]
 ```
 
-### (Optional) Create & run your own ELMv2-trtllm engines from ELMv2 Huggingface(HF) checkpoints.
+
+### (Optional) Create & run your own ELM2-trtllm engines from ELM2 Huggingface(HF) checkpoints.
 
 #### Compile the Model into a TensorRT Engine
 
