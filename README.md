@@ -101,14 +101,15 @@ Supported gpu_types : [A100, H100]
 
 ### c. (Optional) Create & run your own ELM2-trtllm engines from ELM2 Huggingface(HF) checkpoints.
 
-#### Compile the Model into a TensorRT Engine
+#### Compile the Model into a TensorRT-LLM Engine
+Following instructions are to build a tensortrt_llm engine with int-8 quantization. For more detailed configurations, please refer to the phi3 conversion instructions provided by Nvidia [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/phi).
 
 ```bash
 docker attach elm_trtllm
 cd /lm/TensorRT-LLM/examples/phi
-pip install -r requirements.txt
-python3 convert_checkpoint.py --model_dir <hf_elm2_checkpoint> --output_dir <trtllm_elm2_checkpoint> 
-trtllm-build --checkpoint_dir <trtllm_elm2_checkpoint> --gemm_plugin bfloat16 --output_dir <trtllm_elm2_engine>
+#pip install -r requirements.txt
+python3 convert_checkpoint.py --use_weight_only --weight_only_precision int8 --max_seq_len 4096 --max_batch_size 256 --model_dir ../slicexai/elm2-0.50-instruct --output_dir ../slicexai/elm2-0.50-instruct_trtllm_ckpt
+trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --checkpoint_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm2-0.50-instruct-trtllm-engine
 ```
 
 #### Run the Model
