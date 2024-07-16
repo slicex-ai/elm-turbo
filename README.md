@@ -73,7 +73,7 @@ You can either use the instructions provided by Nvidia in [trtllm](<link>). To r
 
 or We have pre-built ELM2-trtllm engines for A100 and H100 GPUS. Below are the instuctions to install and run them.
 
-### a. Setup Nvidia's Trtllm with docker.
+### a. Download & install Nvidia's TensorRT-LLM with docker.
 ```
 sh setup_trtllm.sh
 ```
