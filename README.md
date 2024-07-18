@@ -5,7 +5,7 @@
   <img src="elm-rambutan.png" width="256"/>
 </div>
 
-ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM2** models (named _Rambutan_). 
+ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM-Turbo** models (named _Rambutan_). 
 
 _Model:_ ELM introduces a new type of _(de)-composable LLM model architecture_ along with the algorithmic optimizations required to learn (training) and run (inference) these models. At a high level, we train a single ELM model in a self-supervised manner (during pre-training phase) but once trained the ELM model can be sliced in many ways to fit different user/task needs. The optimizations can be applied to the model either during the pre-training and/or fine-tuning stage. 
 
@@ -19,11 +19,11 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 
 - **HuggingFace** (access ELM Model cards, code & app from HF): https://huggingface.co/slicexai
 
-## ELM2 Model Release
+## ELM-Turbo Model Release
 In our second version, we employed our decomposable ELM techniques on a widely used open-source LLM, - `microsoft/Phi-3-mini-128k-instruct` (3.82B params) [phi3-license](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 2.01 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively.
 
-## 1. Run ELM2 models with Huggingface Transformers library.
-There are three slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm2-0.125-instruct` (1.33B params), 2. `slicexai/elm2-0.25-instruct`(1.56B params), 3. `slicexai/elm2-0.50-instruct` (2.01B params). 
+## 1. Run ELM-Turbo models with Huggingface Transformers library.
+There are three slices derived from the `phi3-mini` (3.82B params) model - 1. `slicexai/elm-turbo-0.125-instruct` (1.33B params), 2. `slicexai/elm-turbo-0.25-instruct`(1.56B params), 3. `slicexai/elm-turbo-0.50-instruct` (2.01B params). 
 
 Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct).
 ```bash
@@ -33,14 +33,14 @@ accelerate==0.31.0
 transformers==4.41.2
 ```
 
-Example - To run the `slicexai/elm2-0.50-instruct`
+Example - To run the `slicexai/elm-turbo-0.50-instruct`
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 
-elm2_model = "slicexai/elm2-0.50-instruct"
+elm_turbo_model = "slicexai/elm-turbo-0.50-instruct"
 model = AutoModelForCausalLM.from_pretrained( 
-    elm2_model,  
+    elm_turbo_model,  
     device_map="cuda",  
     torch_dtype=torch.bfloat16,  
     trust_remote_code=True,
@@ -50,7 +50,7 @@ messages = [
     {"role": "user", "content": "Can you provide ways to eat combinations of bananas and dragonfruits?"}, 
 ]
 
-tokenizer = AutoTokenizer.from_pretrained(elm2_model, legacy=False) 
+tokenizer = AutoTokenizer.from_pretrained(elm_turbo_model, legacy=False) 
 pipe = pipeline( 
     "text-generation", 
     model=model, 
@@ -68,11 +68,11 @@ output = pipe(messages, **generation_args)
 print(output[0]['generated_text']) 
 ```
 
-## 2. Running ELM2 via Nvidia's TensorRT-LLM
+## 2. Running ELM-Turbo via Nvidia's TensorRT-LLM
 
-- If you are using A100 or H100 GPUs, you can utilize our pre-built ELM2-TRTLLM engines. Below are the instructions to install and run them.
+- If you are using A100 or H100 GPUs, you can utilize our pre-built ELM-Turbo-TRTLLM engines. Below are the instructions to install and run them.
 
-- Additionally, you can build your own TRTLLM engines by following the instructions provided in [Section .C](https://github.com/slicex-ai/elm2/blob/main/README.md#c-optional-create--run-your-own-elm2-trtllm-engines-from-elm2-huggingfacehf-checkpoints).
+- Additionally, you can build your own TRTLLM engines by following the instructions provided in [Section .C](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#c-optional-create--run-your-own-elm-turbo-trtllm-engines-from-elm-turbo-huggingfacehf-checkpoints).
 
 - To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
 
@@ -80,42 +80,42 @@ print(output[0]['generated_text'])
 ### a. Download & install Nvidia's TensorRT-LLM with docker.
 The following commands create a Docker container named `elm_trtllm` and install TensorRT-LLM. If you encounter any installation errors related to TensorRT-LLM, please refer to the troubleshooting section [here](https://nvidia.github.io/TensorRT-LLM/reference/troubleshooting.html).
 ```
-git clone https://github.com/slicex-ai/elm2.git
-cd elm2
+git clone https://github.com/slicex-ai/elm-turbo.git
+cd elm-turbo
 sh setup_trtllm.sh
 ```
 This creates a docker named `elm_trtllm` and installs tensorrt_llm. 
 
-### b. Run pre-built ELM2-trtllm engines with your input prompts.
+### b. Run pre-built ELM-Turbo-trtllm engines with your input prompts.
 
-Example: To run our pre-built trt-engine for `slicexai/elm2-0.50-instruct` on A100 & H100 gpus respectively,
+Example: To run our pre-built trt-engine for `slicexai/elm-turbo-0.50-instruct` on A100 & H100 gpus respectively,
 ```
 docker attach elm_trtllm
 cd /lm
-sh run_elm2_trtllm_engine.sh slicexai/elm2-0.50-instruct A100 "plan a fun day with my grandparents."
-sh run_elm2_trtllm_engine.sh slicexai/elm2-0.50-instruct H100 "plan a fun day with my grandparents."
+sh run_elm-turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct A100 "plan a fun day with my grandparents."
+sh run_elm-turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct H100 "plan a fun day with my grandparents."
 ```
 
 Detailed instructions to run the engine:
 ```
-Usage: sh run_elm2_trtllm_engine.sh <elm2_model_id> <gpu_type> "<input_prompt>"
-Supported elm2_model_id choices : [slicexai/elm2-0.50-instruct, slicexai/elm2-0.25-instruct, slicexai/elm2-0.125-instruct]
+Usage: sh run_elm-turbo_trtllm_engine.sh <elm_turbo_model_id> <gpu_type> "<input_prompt>"
+Supported elm-turbo_model_id choices : [slicexai/elm-turbo-0.50-instruct, slicexai/elm-turbo-0.25-instruct, slicexai/elm-turbo-0.125-instruct]
 Supported gpu_types : [A100, H100]
 ```
 
 
-### c. (Optional) Create & run your own ELM2-trtllm engines from ELM2 Huggingface(HF) checkpoints.
+### c. (Optional) Create & run your own ELM-Turbo-trtllm engines from ELM-Turbo Huggingface(HF) checkpoints.
 
 #### Compile the Model into a TensorRT-LLM Engine
-To build an elm2 `slicexai/elm2-0.50-instruct` tensortrt_llm engine with INT-8 quantization, follow the instructions below. For more detailed configurations, refer to the Phi3 conversion instructions provided by NVIDIA [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/phi).
+To build an elm-turbo `slicexai/elm-turbo-0.50-instruct` tensortrt_llm engine with INT-8 quantization, follow the instructions below. For more detailed configurations, refer to the Phi3 conversion instructions provided by NVIDIA [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/phi).
 
 ```bash
 docker attach elm_trtllm
 cd /lm/TensorRT-LLM/examples/phi
 pip install flash_attn
-huggingface-cli download slicexai/elm2-0.50-instruct --local-dir ../slicexai/elm2-0.50-instruct
-python3 convert_checkpoint.py --dtype bfloat16 --use_weight_only --weight_only_precision int8  --model_dir ../slicexai/elm2-0.50-instruct --output_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt
-trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_len 4096 --max_batch_size 256 --checkpoint_dir ../slicexai/elm2-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm2-0.50-instruct-trtllm-engine
+huggingface-cli download slicexai/elm-turbo-0.50-instruct --local-dir ../slicexai/elm-turbo-0.50-instruct
+python3 convert_checkpoint.py --dtype bfloat16 --use_weight_only --weight_only_precision int8  --model_dir ../slicexai/elm-turbo-0.50-instruct --output_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-ckpt
+trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_len 4096 --max_batch_size 256 --checkpoint_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-engine
 ```
 
 #### Run the Model
@@ -123,11 +123,11 @@ Now that you’ve got your model engine, its time to run it.
 
 ```bash
 python3 ../run.py \
-  --engine_dir ../slicexai/elm2-0.50-instruct-trtllm-engine \
+  --engine_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-engine \
   --max_output_len 512 \
   --presence_penalty 0.7 \
   --frequency_penalty 0.7 \
-  --tokenizer_dir ../slicexai/elm2-0.50-instruct \
+  --tokenizer_dir ../slicexai/elm-turbo-0.50-instruct \
   --input_text """<s><|user|>
 plan a fun day with my grandparents.<|end|>
 <|assistant|>
