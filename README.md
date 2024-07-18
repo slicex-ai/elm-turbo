@@ -92,13 +92,13 @@ Example: To run our pre-built trt-engine for `slicexai/elm-turbo-0.50-instruct` 
 ```
 docker attach elm_trtllm
 cd /lm
-sh run_elm-turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct A100 "plan a fun day with my grandparents."
-sh run_elm-turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct H100 "plan a fun day with my grandparents."
+sh run_elm_turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct A100 "plan a fun day with my grandparents."
+sh run_elm_turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct H100 "plan a fun day with my grandparents."
 ```
 
 Detailed instructions to run the engine:
 ```
-Usage: sh run_elm-turbo_trtllm_engine.sh <elm_turbo_model_id> <gpu_type> "<input_prompt>"
+Usage: sh run_elm_turbo_trtllm_engine.sh <elm_turbo_model_id> <gpu_type> "<input_prompt>"
 Supported elm-turbo_model_id choices : [slicexai/elm-turbo-0.50-instruct, slicexai/elm-turbo-0.25-instruct, slicexai/elm-turbo-0.125-instruct]
 Supported gpu_types : [A100, H100]
 ```
