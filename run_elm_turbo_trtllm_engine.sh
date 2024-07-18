@@ -18,7 +18,7 @@ echo "ELM_TURBO_HF_MODEL_DIR:"$ELM_TURBO_HF_MODEL_DIR
 echo "GPU_TYPE:"$GPU_TYPE
 echo "PROMPT:"$PROMPT
 
-ENGINE_DIR="${ELM_Turbo_HF_MODEL_DIR}-trtllm-${GPU_TYPE}"
+ENGINE_DIR="${ELM_TURBO_HF_MODEL_DIR}-trtllm-${GPU_TYPE}"
 
 cd /lm/TensorRT-LLM/examples
 huggingface-cli download ${ENGINE_DIR} --local-dir ${ENGINE_DIR}
