@@ -20,7 +20,7 @@ _Fast Inference with Customization:_ Once trained, the ELM model architecture pe
 - **HuggingFace** (access ELM Model cards, code & app from HF): https://huggingface.co/slicexai
 
 ## ELM-Turbo Model Release
-In our second version, we employed our decomposable ELM techniques on a widely used open-source LLM, - `microsoft/Phi-3-mini-128k-instruct` (3.82B params) [phi3-license](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 2.01 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
+In this version, we employed our decomposable ELM techniques on a widely used open-source LLM, - `microsoft/Phi-3-mini-128k-instruct` (3.82B params) [phi3-license](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 2.01 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
 
 - 👉 [Section 1.](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#1-run-elm-turbo-models-with-huggingface-transformers-library) provides instructions to run ELM-Turbo with the Huggingface Transformers library :hugs:.
 - 👉 [Section 2.](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#2-running-elm-turbo-via-nvidias-tensorrt-llm) provides instructions to run ELM-Turbo engines powered by NVIDIA's TensoRT-LLM. 
