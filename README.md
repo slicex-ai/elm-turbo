@@ -13,7 +13,7 @@ _Training:_ ELM Turbo introduces algorithmic optimizations that allows us to tra
 
 _Fast Inference with Customization:_ As with our previous version, once trained, ELM Turbo model architecture permits flexible inference strategies at runtime depending on deployment & device constraints to allow users to make optimal compute/memory tradeoff choices for their application needs. In addition to the blazing fast speeds achieved by native ELM Turbo slice optimization, we also layered in NVIDIA's TensorRT-LLM integration to get further speedups. The end result 👉 optimized ELM Turbo models that achieve one of the world's best LLM performance.
 
-- **Blog:** [Medium](https://medium.com/sujith-ravi/introducing-elm-efficient-customizable-privacy-preserving-llms-cea56e4f727d)
+- **Blog:** [Medium](https://medium.com/sujith-ravi/introducing-elm-turbo-next-generation-efficient-decomposable-llms-a2347bd08676)
 
 - **Github:** https://github.com/slicex-ai/elm-turbo
 
