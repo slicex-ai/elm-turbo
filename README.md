@@ -65,7 +65,8 @@ pipe = pipeline(
 
 generation_args = { 
     "max_new_tokens": 500, 
-    "return_full_text": False, 
+    "return_full_text": False,
+    "repetition_penalty": 1.2,
     "temperature": 0.0, 
     "do_sample": False, 
 } 
