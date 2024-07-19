@@ -20,8 +20,8 @@ _Fast Inference with Customization:_ As with our previous version, once trained,
 
 - **HuggingFace** (access ELM Turbo Model cards, code & app from HF): 👉 [here](https://huggingface.co/collections/slicexai/elm-turbo-66945032f3626024aa066fde)
 
-## ELM-Turbo Model Release
-In this version, we employed our new, improved decomposable ELM techniques on a widely used open-source LLM, - `microsoft/Phi-3-mini-128k-instruct` (3.82B params) [phi3-license](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 2.01 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
+## ELM Turbo Model Release
+In this version, we employed our new, improved decomposable ELM techniques on a widely used open-source LLM, `microsoft/Phi-3-mini-128k-instruct` (3.82B params) (check [phi3-license] for usage)(https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 2.01 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
 
 - [Section 1.](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#1-run-elm-turbo-models-with-huggingface-transformers-library) 👉 instructions to run ELM-Turbo with the Huggingface Transformers library :hugs:.
 - [Section 2.](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#2-running-elm-turbo-via-nvidias-tensorrt-llm) 👉 instructions to run ELM-Turbo engines powered by NVIDIA's TensoRT-LLM. 
@@ -76,11 +76,11 @@ print(output[0]['generated_text'])
 
 ## 2. Running ELM Turbo via Nvidia's TensorRT-LLM
 
-- If you are using A100 or H100 GPUs, you can utilize our pre-built ELM Turbo-TRTLLM engines. Below are the instructions to install and run them.
+- **[ELM Turbo for Cloud AI]** If you are using A100 or H100 GPUs, you can utilize our pre-built ELM Turbo-TRTLLM engines. Below are the instructions to install and run them.
 
 - Additionally, you can build your own TRTLLM engines by following the instructions provided in [Section .C](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#c-optional-create--run-your-own-elm-turbo-trtllm-engines-from-elm-turbo-huggingfacehf-checkpoints).
 
-- To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
+- **[ELM Turbo for Edge AI] To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
 
 
 ### a. Download & install Nvidia's TensorRT-LLM with docker.
