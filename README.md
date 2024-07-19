@@ -33,7 +33,7 @@ There are three ELM Turbo slices derived from the `phi3-mini` (3.82B params) mod
   2. `slicexai/elm-turbo-0.25-instruct`(1.56B params)
   3. `slicexai/elm-turbo-0.50-instruct` (2.01B params) 
 
-Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct).
+Required packages for [Hugginface Phi-3-mini](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct) & corresponding ELM Turbo model slices.
 ```bash
 flash_attn==2.5.8
 torch==2.3.1
