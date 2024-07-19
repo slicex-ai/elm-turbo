@@ -76,11 +76,11 @@ print(output[0]['generated_text'])
 
 ## 2. Running ELM Turbo via Nvidia's TensorRT-LLM
 
-- **[ELM Turbo for Cloud AI]** If you are using A100 or H100 GPUs, you can utilize our pre-built ELM Turbo-TRTLLM engines. Below are the instructions to install and run them.
+- [ELM Turbo for **Cloud AI**] If you are using A100 or H100 GPUs, you can utilize our pre-built ELM Turbo-TRTLLM engines. Below are the instructions to install and run them.
 
 - Additionally, you can build your own TRTLLM engines by following the instructions provided in [Section .C](https://github.com/slicex-ai/elm-turbo/blob/main/README.md#c-optional-create--run-your-own-elm-turbo-trtllm-engines-from-elm-turbo-huggingfacehf-checkpoints).
 
-- **[ELM Turbo for Edge AI] To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
+- **[ELM Turbo for Edge AI]** To run on edge (Windows RTX), follow the instructions provided by Nvidia in their TRT-LLM documentation: [Windows README](https://github.com/NVIDIA/TensorRT-LLM/blob/main/windows/README.md).
 
 
 ### a. Download & install Nvidia's TensorRT-LLM with docker.
