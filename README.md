@@ -29,7 +29,7 @@ In this version, we employed our new, improved decomposable ELM techniques on a 
 
 ## 1. Run ELM Turbo models with Huggingface Transformers library.
 There are three ELM Turbo slices derived from the `phi3-mini` (3.82B params) model: 
-* 1. `slicexai/elm-turbo-0.125-instruct` (1.33B params)
+  1. `slicexai/elm-turbo-0.125-instruct` (1.33B params)
   2. `slicexai/elm-turbo-0.25-instruct`(1.56B params)
   3. `slicexai/elm-turbo-0.50-instruct` (2.01B params). 
 
