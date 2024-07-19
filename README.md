@@ -2,6 +2,10 @@
 **ELM** (which stands for **E**fficient **L**anguage **M**odels) **Turbo** is the next generation model in the series of cutting-edge language models from [SliceX AI](https://slicex.ai) that is designed to achieve the best in class performance in terms of _quality_, _throughput_ & _memory_.
 
 <div align="center">
+  <img src="elm-turbo-training.png" width="768"/>
+</div>
+
+<div align="center">
   <img src="elm-turbo-starfruit.png" width="256"/>
 </div>
 
