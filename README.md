@@ -1,15 +1,18 @@
-# SliceX AI™ ELM (Efficient Language Models) - Version 0.2
-**ELM** (which stands for **E**fficient **L**anguage **M**odels) is the first version in the series of cutting-edge language models from [SliceX AI](https://slicex.ai) that is designed to achieve the best in class performance in terms of _quality_, _throughput_ & _memory_.
+# SliceX AI™ ELM Turbo
+**ELM** (which stands for **E**fficient **L**anguage **M**odels) **Turbo** is the next generation model in the series of cutting-edge language models from [SliceX AI](https://slicex.ai) that is designed to achieve the best in class performance in terms of _quality_, _throughput_ & _memory_.
 
 <div align="center">
   <img src="elm-turbo-starfruit.png" width="256"/>
 </div>
 
-ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM-Turbo** models (named _Rambutan_). 
+ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM-Turbo** models (named _Starfruit_). 
 
-_Model:_ ELM introduces a new type of _(de)-composable LLM model architecture_ along with the algorithmic optimizations required to learn (training) and run (inference) these models. At a high level, we train a single ELM model in a self-supervised manner (during pre-training phase) but once trained the ELM model can be sliced in many ways to fit different user/task needs. The optimizations can be applied to the model either during the pre-training and/or fine-tuning stage. 
+_Model:_ ELM Turbo introduces a more _adaptable_, _decomposable LLM architecture_ thereby yielding flexibility in (de)-composing LLM models into smaller stand-alone slices. In comparison to our previous version, the new architecture allows for more powerful model slices to be learnt during the training process (yielding better quality & higher generative capacity) and a higher level of control wrt LLM efficiency - fine-grained slices to produce varying LLM model sizes (depending on the user/task needs and deployment criteria, i.e., Cloud or Edge device constraints).
 
-_Fast Inference with Customization:_ Once trained, the ELM model architecture permits flexible inference strategies at runtime depending on the deployment needs. For instance, the ELM model can  be _decomposed_ into smaller slices, i.e., smaller (or larger) models can be extracted from the original model to create multiple inference endpoints. Alternatively, the original (single) ELM model can be loaded _as is_ for inference and different slices within the model can be queried directly to power faster inference. This provides an additional level of flexibility for users to make compute/memory tradeoffs depending on their application and runtime needs.
+_Training:_ ELM Turbo introduces algorithmic optimizations that allows us to train a single model but once trained the ELM Turbo model can be sliced in many ways to fit different user/task needs.
+ELM introduces a new type of _(de)-composable LLM model architecture_ along with the algorithmic optimizations required to learn (training) and run (inference) these models. At a high level, we train a single ELM model in a self-supervised manner (during pre-training phase) but once trained the ELM model can be sliced in many ways to fit different user/task needs. The optimizations can be applied to the model either during the pre-training and/or fine-tuning stage. 
+
+_Fast Inference with Customization:_ As with our previous version, once trained, ELM Turbo model architecture permits flexible inference strategies at runtime depending on deployment & device constraints to allow users to make optimal compute/memory tradeoff choices for their application needs. In addition to the blazing fast speeds achieved by native ELM Turbo slice optimization, we also layered in NVIDIA's TensorRT-LLM integration to get further speedups. The end result 👉 optimized ELM Turbo models that achieve one of the world's best LLM performance.
 
 - **Blog:** [Medium](https://medium.com/sujith-ravi/introducing-elm-efficient-customizable-privacy-preserving-llms-cea56e4f727d)
 
