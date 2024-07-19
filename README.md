@@ -18,7 +18,7 @@ _Fast Inference with Customization:_ As with our previous version, once trained,
 
 - **Github:** https://github.com/slicex-ai/elm-turbo
 
-- **HuggingFace** (access ELM Turbo Model cards, code & app from HF): 👉 [here](https://huggingface.co/collections/slicexai/elm-turbo-66945032f3626024aa066fde)
+- **HuggingFace** (access ELM Turbo Models in HF): 👉 [here](https://huggingface.co/collections/slicexai/elm-turbo-66945032f3626024aa066fde)
 
 ## ELM Turbo Model Release
 In this version, we employed our new, improved decomposable ELM techniques on a widely used open-source LLM, `microsoft/Phi-3-mini-128k-instruct` (3.82B params) (check [phi3-license] for usage)(https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 2.01 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
