@@ -125,7 +125,7 @@ trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_le
 ```
 
 #### Run the Model
-Now that you’ve got your model engine, its time to run it.
+Now that you’ve got your model engine, it's time to run it.
 
 ```bash
 python3 ../run.py \
