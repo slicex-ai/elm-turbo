@@ -5,10 +5,6 @@
   <img src="elm-turbo-training.png" width="768"/>
 </div>
 
-<div align="center">
-  <img src="elm-turbo-starfruit.png" width="256"/>
-</div>
-
 ELM is designed to be a modular and customizable family of neural networks that are highly efficient and performant. Today we are sharing the second version in this series: **ELM Turbo** models (named _Starfruit_). 
 
 _Model:_ ELM Turbo introduces a more _adaptable_, _decomposable LLM architecture_ thereby yielding flexibility in (de)-composing LLM models into smaller stand-alone slices. In comparison to our previous version, the new architecture allows for more powerful model slices to be learnt during the training process (yielding better quality & higher generative capacity) and a higher level of control wrt LLM efficiency - fine-grained slices to produce varying LLM model sizes (depending on the user/task needs and deployment criteria, i.e., Cloud or Edge device constraints).
