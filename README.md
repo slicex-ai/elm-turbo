@@ -51,6 +51,42 @@ Required Packages for [Meta-Llama-3.1-8B-Instruct](meta-llama/Meta-Llama-3.1-8B-
 transformers==4.43.3
 ```
 
+Example - To run the `slicexai/Llama3.1-elm-turbo-4B-instruct`
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+import torch
+
+elm_turbo_model = "slicexai/Llama3.1-elm-turbo-4B-instruct"
+model = AutoModelForCausalLM.from_pretrained( 
+    elm_turbo_model,  
+    device_map="cuda",  
+    torch_dtype=torch.bfloat16,  
+    trust_remote_code=True
+)
+messages = [ 
+    {"role": "user", "content": "Can you provide ways to eat combinations of bananas and dragonfruits?"}, 
+]
+
+tokenizer = AutoTokenizer.from_pretrained(elm_turbo_model, legacy=False) 
+pipe = pipeline( 
+    "text-generation", 
+    model=model, 
+    tokenizer=tokenizer, 
+) 
+
+generation_args = { 
+    "max_new_tokens": 500, 
+    "return_full_text": False,
+    "repetition_penalty": 1.2,
+    "temperature": 0.0, 
+    "do_sample": False, 
+} 
+
+output = pipe(messages, **generation_args) 
+print(output[0]['generated_text']) 
+```
+
+
 Example - To run the `slicexai/elm-turbo-0.50-instruct`
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
