@@ -28,7 +28,7 @@ In this version, we employed our new, improved decomposable ELM techniques on wi
 **NOTE**: The open-source datasets from the HuggingFace hub used for instruction fine-tuning ELM Turbo include, but are not limited to: `allenai/tulu-v2-sft-mixture`, `microsoft/orca-math-word-problems-200k`, `mlabonne/WizardLM_evol_instruct_70k-ShareGPT`, and `mlabonne/WizardLM_evol_instruct_v2_196K-ShareGPT`. We advise users to exercise caution when utilizing ELM Turbo, as these datasets may contain factually incorrect information, unintended biases, inappropriate content, and other potential issues. It is recommended to thoroughly evaluate the model's outputs and implement appropriate safeguards for your specific use case.
 
 ## 1. Run ELM Turbo models with Huggingface Transformers library.
-There are three ELM Turbo slices derived from the `Llama-3.1-8B` (3.82B params) model: 
+There are three ELM Turbo slices derived from the `Meta-Llama-3.1-8B-Instruct` (8B params) model: 
   1. `slicexai/Llama3.1-elm-turbo-3B-instruct` (3.1B params)
   2. `slicexai/Llama3.1-elm-turbo-4B-instruct`(4.1B params)
   3. `slicexai/Llama3.1-elm-turbo-6B-instruct` (6.3B params) 
