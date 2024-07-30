@@ -143,18 +143,18 @@ This creates a docker named `elm_trtllm` and installs tensorrt_llm.
 
 ### (b) Run pre-built ELM Turbo-trtllm engines with your input prompts.
 
-Example: To run our pre-built trt-engine for `slicexai/elm-turbo-0.50-instruct` on A100 & H100 gpus respectively,
+Example: To run our pre-built trt-engine for `slicexai/Llama3.1-elm-turbo-4B-instruct` on A100 & H100 gpus respectively,
 ```
 docker attach elm_trtllm
 cd /lm
-sh run_elm_turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct A100 "plan a fun day with my grandparents."
-sh run_elm_turbo_trtllm_engine.sh slicexai/elm-turbo-0.50-instruct H100 "plan a fun day with my grandparents."
+sh run_llama_elm_turbo_trtllm_engine.sh slicexai/Llama3.1-elm-turbo-4B-instruct A100 "plan a fun day with my grandparents."
+sh run_llama_elm_turbo_trtllm_engine.sh slicexai/Llama3.1-elm-turbo-4B-instruct H100 "plan a fun day with my grandparents."
 ```
 
 Detailed instructions to run the engine:
 ```
-Usage: sh run_elm_turbo_trtllm_engine.sh <elm_turbo_model_id> <gpu_type> "<input_prompt>"
-Supported elm-turbo_model_id choices : [slicexai/elm-turbo-0.50-instruct, slicexai/elm-turbo-0.25-instruct, slicexai/elm-turbo-0.125-instruct]
+Usage: sh run_llama_elm_turbo_trtllm_engine.sh <elm_turbo_model_id> <gpu_type> "<input_prompt>"
+Supported elm-turbo_model_id choices : [slicexai/Llama3.1-elm-turbo-6B-instruct, slicexai/Llama3.1-elm-turbo-4B-instruct, slicexai/Llama3.1-elm-turbo-3B-instruct]
 Supported gpu_types : [A100, H100]
 ```
 
@@ -162,15 +162,14 @@ Supported gpu_types : [A100, H100]
 ### (c) (Optional) Create & run your own ELM Turbo-trtllm engines from ELM Turbo Huggingface(HF) checkpoints.
 
 #### Compile the Model into a TensorRT-LLM Engine
-To build an elm-turbo `slicexai/elm-turbo-0.50-instruct` tensortrt_llm engine with INT-8 quantization, follow the instructions below. For more detailed configurations, refer to the Phi3 conversion instructions provided by NVIDIA [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/phi).
+To build an elm-turbo `slicexai/Llama3.1-elm-turbo-6B-instruct` tensortrt_llm engine with INT-8 quantization, follow the instructions below. For more detailed configurations, refer to the Llama conversion instructions provided by NVIDIA [here](https://github.com/NVIDIA/TensorRT-LLM/tree/main/examples/llama).
 
 ```bash
 docker attach elm_trtllm
-cd /lm/TensorRT-LLM/examples/phi
-pip install flash_attn
-huggingface-cli download slicexai/elm-turbo-0.50-instruct --local-dir ../slicexai/elm-turbo-0.50-instruct
-python3 convert_checkpoint.py --dtype bfloat16 --use_weight_only --weight_only_precision int8  --model_dir ../slicexai/elm-turbo-0.50-instruct --output_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-ckpt
-trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_len 4096 --max_batch_size 256 --checkpoint_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-ckpt --output_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-engine
+cd /lm/TensorRT-LLM/examples/llama
+huggingface-cli download slicexai/Llama3.1-elm-turbo-6B-instruct --local-dir ../slicexai/Llama3.1-elm-turbo-6B-instruct
+python3 convert_checkpoint.py --dtype bfloat16 --use_weight_only --weight_only_precision int8  --model_dir ../slicexai/Llama3.1-elm-turbo-6B-instruct --output_dir ../slicexai/Llama3.1-elm-turbo-6B-instruct-trtllm-ckpt
+trtllm-build --gpt_attention_plugin bfloat16 --gemm_plugin bfloat16 --max_seq_len 4096 --max_batch_size 256 --checkpoint_dir ../slicexai/Llama3.1-elm-turbo-6B-instruct-trtllm-ckpt --output_dir ../slicexai/Llama3.1-elm-turbo-6B-instruct-trtllm-engine
 ```
 
 #### Run the Model
@@ -178,13 +177,14 @@ Now that you’ve got your model engine, it's time to run it.
 
 ```bash
 python3 ../run.py \
-  --engine_dir ../slicexai/elm-turbo-0.50-instruct-trtllm-engine \
+  --engine_dir ../slicexai/Llama3.1-elm-turbo-6B-instruct-trtllm-engine \
   --max_output_len 512 \
   --presence_penalty 0.7 \
   --frequency_penalty 0.7 \
-  --tokenizer_dir ../slicexai/elm-turbo-0.50-instruct \
-  --input_text """<s><|user|>
-plan a fun day with my grandparents.<|end|>
-<|assistant|>
-"""
+  --tokenizer_dir ../slicexai/Llama3.1-elm-turbo-6B-instruct \
+  --input_text """<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+    
+    plan a fun day with my grandparents.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+    
+    """
 ```
