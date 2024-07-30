@@ -46,6 +46,11 @@ accelerate==0.31.0
 transformers==4.41.2
 ```
 
+Required Packages for [Meta-Llama-3.1-8B-Instruct](meta-llama/Meta-Llama-3.1-8B-Instruct) & corresponding ELM Turbo model slices.
+```
+transformers==4.43.3
+```
+
 Example - To run the `slicexai/elm-turbo-0.50-instruct`
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
