@@ -3,8 +3,8 @@ set -e
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <elm-turbo_model_id> <gpu_type> '<input_prompt>'"
-    echo "Example command to run A100 engine: $0 slicexai/Llama3.1-elm-turbo-6B-instruct A100 'plan a fun day with my grandparents.'"
-    echo "Example command to run H100 engine: $0 slicexai/Llama3.1-elm-turbo-6B-instruct H100 'plan a fun day with my grandparents.'"
+    echo "Example command to run A100 engine: sh $0 slicexai/Llama3.1-elm-turbo-6B-instruct A100 'plan a fun day with my grandparents.'"
+    echo "Example command to run H100 engine: sh $0 slicexai/Llama3.1-elm-turbo-6B-instruct H100 'plan a fun day with my grandparents.'"
     echo "Supported 'elm-turbo_model_id' choices : [slicexai/Llama3.1-elm-turbo-6B-instruct, slicexai/Llama3.1-elm-turbo-4B-instruct, slicexai/Llama3.1-elm-turbo-3B-instruct]"
     echo "Supported gpt_types : [A100, H100]"
     exit 1
