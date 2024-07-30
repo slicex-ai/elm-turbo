@@ -3,9 +3,9 @@ set -e
 
 if [ $# -ne 3 ]; then
     echo "Usage: $0 <elm-turbo_model_id> <gpu_type> '<input_prompt>'"
-    echo "Example command to run A100 engine: $0 slicexai/elm-turbo-0.50-instruct A100 'plan a fun day with my grandparents.'"
-    echo "Example command to run H100 engine: $0 slicexai/elm-turbo-0.50-instruct H100 'plan a fun day with my grandparents.'"
-    echo "Supported 'elm-turbo_model_id' choices : [slicexai/elm-turbo-0.50-instruct, slicexai/elm-turbo-0.25-instruct, slicexai/elm-turbo-0.125-instruct]"
+    echo "Example command to run A100 engine: $0 slicexai/Llama3.1-elm-turbo-6B-instruct A100 'plan a fun day with my grandparents.'"
+    echo "Example command to run H100 engine: $0 slicexai/Llama3.1-elm-turbo-6B-instruct H100 'plan a fun day with my grandparents.'"
+    echo "Supported 'elm-turbo_model_id' choices : [slicexai/Llama3.1-elm-turbo-6B-instruct, slicexai/Llama3.1-elm-turbo-4B-instruct, slicexai/Llama3.1-elm-turbo-3B-instruct]"
     echo "Supported gpt_types : [A100, H100]"
     exit 1
 fi
@@ -24,14 +24,31 @@ cd /lm/TensorRT-LLM/examples
 huggingface-cli download ${ENGINE_DIR} --local-dir ${ENGINE_DIR}
 huggingface-cli download ${ELM_TURBO_HF_MODEL_DIR} --local-dir ${ELM_TURBO_HF_MODEL_DIR}
 
-python3 run.py \
+if echo "$ELM_TURBO_HF_MODEL_DIR" | grep -q "Llama3.1"; then
+  echo "Running ${ENGINE_DIR} engine..."
+  python3 run.py \
   --engine_dir ${ENGINE_DIR} \
   --max_output_len 512 \
   --presence_penalty 0.7 \
   --frequency_penalty 0.7 \
   --temperature 0.0 \
   --tokenizer_dir ${ELM_TURBO_HF_MODEL_DIR} \
-  --input_text """<s><|user|>
-  ${PROMPT}<|end|>
-<|assistant|>
-"""
+  --input_text """<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+    
+    ${PROMPT}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+    
+    """
+else
+  echo "Running ${ENGINE_DIR} engine..."
+  python3 run.py \
+    --engine_dir ${ENGINE_DIR} \
+    --max_output_len 512 \
+    --presence_penalty 0.7 \
+    --frequency_penalty 0.7 \
+    --temperature 0.0 \
+    --tokenizer_dir ${ELM_TURBO_HF_MODEL_DIR} \
+    --input_text """<s><|user|>
+    ${PROMPT}<|end|>
+  <|assistant|>
+  """
+fi
