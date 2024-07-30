@@ -20,7 +20,7 @@ _Fast Inference with Customization:_ As with our previous version, once trained,
 - **HuggingFace** (access ELM Turbo Models in HF): 👉  [LLama-3.1](https://huggingface.co/collections/slicexai/llama31-elm-turbo-66a81aa5f6bcb0b775ba5dd7) & [original](https://huggingface.co/collections/slicexai/elm-turbo-66945032f3626024aa066fde) versions
 
 ## ELM Turbo Model Release (🆕 now available for Llama 3.1 as well)
-In this version, we employed our new, improved decomposable ELM techniques on widely used open-source LLMs, `meta-llama/Meta-Llama-3.1-8B-Instruct` (8B params) and `microsoft/Phi-3-mini-128k-instruct` `microsoft/Phi-3-mini-128k-instruct` (3.82B params) (check [Llama-license](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B/blob/main/LICENSE) and [phi3-license](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE) for usage). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 6.3 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
+In this version, we employed our new, improved decomposable ELM techniques on widely used open-source LLMs, `meta-llama/Meta-Llama-3.1-8B-Instruct` (8B params) and `microsoft/Phi-3-mini-128k-instruct` (3.82B params) (check [Llama-license](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B/blob/main/LICENSE) and [phi3-license](https://huggingface.co/microsoft/Phi-3-mini-128k-instruct/resolve/main/LICENSE) for usage). After training, we generated three smaller slices with parameter counts ranging from 1.33 billion to 6.3 billion. Furthermore, we seamlessly integrated these slices into NVIDIA's [TensoRT-LLM](https://github.com/NVIDIA/TensorRT-LLM), providing trtllm engines compatible with A100 and H100 GPUs, respectively. 
 
 - [Section 1.](https://github.com/slicex-ai/elm-turbo/tree/main?tab=readme-ov-file#1-run-elm-turbo-models-with-huggingface-transformers-library) 👉 instructions to run ELM-Turbo with the Huggingface Transformers library :hugs:.
 - [Section 2.](https://github.com/slicex-ai/elm-turbo/tree/main?tab=readme-ov-file#2-running-elm-turbo-via-nvidias-tensorrt-llm) 👉 instructions to run ELM-Turbo engines powered by NVIDIA's TensoRT-LLM. 
@@ -28,6 +28,11 @@ In this version, we employed our new, improved decomposable ELM techniques on wi
 **NOTE**: The open-source datasets from the HuggingFace hub used for instruction fine-tuning ELM Turbo include, but are not limited to: `allenai/tulu-v2-sft-mixture`, `microsoft/orca-math-word-problems-200k`, `mlabonne/WizardLM_evol_instruct_70k-ShareGPT`, and `mlabonne/WizardLM_evol_instruct_v2_196K-ShareGPT`. We advise users to exercise caution when utilizing ELM Turbo, as these datasets may contain factually incorrect information, unintended biases, inappropriate content, and other potential issues. It is recommended to thoroughly evaluate the model's outputs and implement appropriate safeguards for your specific use case.
 
 ## 1. Run ELM Turbo models with Huggingface Transformers library.
+There are three ELM Turbo slices derived from the `Llama-3.1-8B` (3.82B params) model: 
+  1. `slicexai/Llama3.1-elm-turbo-3B-instruct` (3.1B params)
+  2. `slicexai/Llama3.1-elm-turbo-4B-instruct`(4.1B params)
+  3. `slicexai/Llama3.1-elm-turbo-6B-instruct` (6.3B params) 
+
 There are three ELM Turbo slices derived from the `phi3-mini` (3.82B params) model: 
   1. `slicexai/elm-turbo-0.125-instruct` (1.33B params)
   2. `slicexai/elm-turbo-0.25-instruct`(1.56B params)
