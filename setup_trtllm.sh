@@ -18,5 +18,8 @@ docker exec ${DOCKER_NAME} sh -c "${command}"
 command="pip3 install tensorrt_llm -U --pre --extra-index-url https://pypi.nvidia.com"
 docker exec ${DOCKER_NAME} sh -c "${command}"
 
+command="pip install --upgrade transformers"
+docker exec ${DOCKER_NAME} sh -c "${command}"
+
 command="python3 -c 'import tensorrt_llm'"
 docker exec ${DOCKER_NAME} sh -c "${command}"
